@@ -1,0 +1,25 @@
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\bin\Debug\net8.0\Core.deps.json
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\bin\Debug\net8.0\Core.dll
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\bin\Debug\net8.0\Core.pdb
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.dll
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\refint\Core.dll
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\Core.pdb
+C:\Users\ADMIN\source\repos\BaseSourceBackend\src\Core\obj\Debug\net8.0\ref\Core.dll
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\bin\Debug\net8.0\Core.deps.json
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\bin\Debug\net8.0\Core.dll
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\bin\Debug\net8.0\Core.pdb
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.csproj.AssemblyReference.cache
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.AssemblyInfoInputs.cache
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.AssemblyInfo.cs
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.sourcelink.json
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.dll
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\refint\Core.dll
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\Core.pdb
+C:\Users\HOANG SON\Source\Repos\BaseNetCore\src\Core\obj\Debug\net8.0\ref\Core.dll
