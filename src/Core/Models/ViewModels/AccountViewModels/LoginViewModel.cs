@@ -15,9 +15,9 @@ namespace Core.Models.ViewModels.AccountViewModels
         [DisplayName("Nhớ đăng nhập?")]
         public bool RememberMe { get; set; }
         //public string? ReturnUrl { get; set; }
-        public int AccountType { get; set; }
-        public bool IsMobile { get; set; } = false;
-        public string? Captcha { get; set; }
+        //public int AccountType { get; set; }
+        //public bool IsMobile { get; set; } = false;
+        //public string? Captcha { get; set; }
     }
     public class LogoutModel
     {

@@ -10,6 +10,7 @@ namespace Application.Services.WebInterfaces
     public interface IUserService : IBaseService, IDisposable
     {
         Task<Acknowledgement<UserViewModel>> Login(LoginViewModel loginModel);
+        Task<Acknowledgement> UpdateRefreshToken(int userId, string refreshToken);
         Task<Acknowledgement> LockUser(string userName);
 
         Task<Acknowledgement<JsonResultPaging<List<UserViewModel>>>> GetUserList(UserSearchModel postData);

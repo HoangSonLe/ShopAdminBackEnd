@@ -13,10 +13,10 @@ namespace Infrastructure.EntityTypeConfiguration
 
             // Properties
             builder.Property(p => p.UserName).HasColumnName("UserName");
-            builder.Property(p => p.Password).HasColumnName("Password");
+            builder.Property(p => p.PasswordHash).HasColumnName("Password");
             builder.Property(p => p.Name).HasColumnName("Name");
             builder.Property(p => p.Email).HasColumnName("Email");
-            builder.Property(p => p.Phone).HasColumnName("Phone");
+            builder.Property(p => p.PhoneNumber).HasColumnName("Phone");
             builder.Property(p => p.TypeAccount).HasColumnName("TypeAccount");
             builder.Property(p => p.NameNonUnicode).HasColumnName("NameNonUnicode");
             builder.Property(p => p.RoleIdList).HasColumnName("RoleIdList");

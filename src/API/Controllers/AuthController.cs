@@ -30,7 +30,6 @@ namespace API.Controllers
         [Route("GetToken")]
         public async Task<Acknowledgement<TokenModel>> GetToken([FromBody] LoginViewModel request)
         {
-            var dtRecieve = DateTime.Now;
             var ack = new Acknowledgement<TokenModel>();
             try
             {
@@ -43,8 +42,8 @@ namespace API.Controllers
                     ack.ErrorMessageList = userAck.ErrorMessageList;
                     return ack;
                 }
-                var user = userAck.Data;
 
+                var user = userAck.Data;
                 var token = _tokenService.GenerateJwtToken(user.Id.ToString());
                 ack.IsSuccess = true;
                 ack.Data = new TokenModel()
@@ -52,9 +51,11 @@ namespace API.Controllers
                     UserId = user.Id,
                     Name = user.Name,
                     RoleIds = user.RoleIdList,
-                    JwtToken = token.JwtToken,
-                    ExpiredDate = token.Expires
+                    AccessToken = token.JwtToken,
+                    RefreshToken = _tokenService.GenerateRefreshToken(),
+                    ExpiredDate = token.Expires,
                 };
+                var saveAck = await UserService.UpdateRefreshToken(ack.Data.UserId,ack.Data.RefreshToken);
                 return ack;
             }
             catch (Exception ex)

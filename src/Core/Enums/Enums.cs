@@ -73,21 +73,82 @@ namespace Core.Enums
         [Description("Nữ")]
         FAMALE
     }
-    public enum EUrnType
+    public enum EAccountType
     {
-        [Description("Linh")]
-        Soul,
-        [Description("Cốt")]
-        Gauss
+        [Description("Khách hàng")]
+        Customer,
+        [Description("Nhân viên")]
+        Employee
+    } 
+    public enum ETagType
+    {
+        [Description("Sản phẩm")]
+        Product,
+        [Description("Bài viết")]
+        News
+    }
+    public enum ETransactionType
+    {
+        [Description("Nhập hàng")]
+        Import,
+        [Description("Bán hàng")]
+        Export
+    } 
+    public enum EBillType
+    {
+        [Description("Cá nhân")]
+        Personal,
+        [Description("Công ty")]
+        Company
+    }
+    public enum EPaymentMethodType
+    {
+        [Description("Tiền mặt")]
+        Cash,
+        [Description("Thanh toán online")]
+        Online
+    }
+    public enum EBillAuthorType
+    {
+        [Description("Khách hàng")]
+        Customer,
+        [Description("Nhân viên")]
+        Employee
+    }
+    public enum EBillStatusType
+    {
+        [Description("Mới")]
+        New,
+        [Description("Đã xác nhận")]
+        Confirm,
+        [Description("Đang chuẩn bị")]
+        Preparing,
+        [Description("Đang giao")]
+        Delivering,
+        [Description("Hoàn thành")]
+        Completed,
+    }
+    public enum EVoucherType
+    {
+        [Description("Giảm giá theo phần trăm sản phẩm")]
+        FreeShip,
+        [Description("Giảm giá theo phần trăm sản phẩm")]
+        DiscountPercentPerProduct,
+        [Description("Giảm giá theo phần trăm hóa đơn")]
+        DiscountPercentPerBill,
+        [Description("Giảm giá tiền sản phẩm")]
+        DiscountPerProduct,
+        [Description("Giảm giá tiền hóa đơn")]
+        DiscountPerBill,
+    }
+    public enum ECategoryType
+    {
+        
     }
     public enum ETelegramNotiType
     {
         [Description("Không xác định")]
         UNDEFINE,
-        [Description("Gửi thông báo giỗ")]
-        Anniversary,
-        [Description("Gửi thông báo hạn ký gửi")]
-        Expired
     }
 
 }

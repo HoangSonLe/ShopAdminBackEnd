@@ -50,7 +50,7 @@ namespace Application.Services.WebServices
                 return response;
             }
 
-            if (!hashPassword.Equals(userDB.Password))
+            if (!hashPassword.Equals(userDB.PasswordHash))
             {
                 response.AddMessage("Tên đăng nhập hoặc mật khẩu không đúng!");
                 return response;
@@ -59,6 +59,20 @@ namespace Application.Services.WebServices
             response.IsSuccess = true;
             return response;
 
+        }
+
+        public async Task<Acknowledgement> UpdateRefreshToken(int userId, string refreshToken)
+        {
+            var ack = new Acknowledgement();
+            var user = await _userRepository.Repository.FirstOrDefaultAsync(i => i.Id == userId);
+            if (user == null)
+            {
+                ack.AddMessage("Không tìm thấy người dùng");
+                return ack;
+            }
+            user.RefreshToken = refreshToken;
+            await ack.TrySaveChangesAsync(res => res.UpdateAsync(user), _userRepository.Repository, (ex) => _logger.LogError(ex.Message));
+            return ack;
         }
         public async Task<Acknowledgement<UserViewModel>> Login(LoginViewModel loginModel)
         {
@@ -136,7 +150,7 @@ namespace Application.Services.WebServices
             var data = userDbList.Data.Concat(selectedUserList).Select(i => new KendoDropdownListModel<int>()
             {
                 Value = i.Id.ToString(),
-                Text = $"{i.Name} - {i.Phone}",
+                Text = $"{i.Name} - {i.PhoneNumber}",
             }).ToList();
             return new Acknowledgement<List<KendoDropdownListModel<int>>>()
             {
@@ -156,7 +170,7 @@ namespace Application.Services.WebServices
                     var searchStringNonUnicode = Utils.NonUnicode(searchModel.SearchString.Trim().ToLower());
                     predicate = predicate.And(i => i.UserName.Trim().ToLower().Contains(searchStringNonUnicode) ||
                                                     i.NameNonUnicode.Trim().ToLower().Contains(searchStringNonUnicode) ||
-                                                    string.IsNullOrEmpty(i.Phone) == false && i.Phone.Trim().ToLower().Contains(searchStringNonUnicode)
+                                                    string.IsNullOrEmpty(i.PhoneNumber) == false && i.PhoneNumber.Trim().ToLower().Contains(searchStringNonUnicode)
                                              );
                 }
                 if (searchModel.RoleIdList.Count > 0)
@@ -255,7 +269,7 @@ namespace Application.Services.WebServices
             {
                 var newUser = _mapper.Map<User>(postData);
                 newUser.NameNonUnicode = Utils.NonUnicode(newUser.Name);
-                newUser.Password = postData.Password;
+                newUser.PasswordHash = postData.Password;
                 newUser.CreatedDate = DateTime.Now;
                 newUser.CreatedBy = _currentUserId;
                 newUser.UpdatedDate = newUser.CreatedDate;
@@ -274,7 +288,7 @@ namespace Application.Services.WebServices
                 else
                 {
                     existItem.Name = postData.Name;
-                    existItem.Phone = postData.Phone;
+                    existItem.PhoneNumber = postData.Phone;
                     existItem.Email = postData.Email;
                     existItem.UserName = postData.UserName;
                     existItem.NameNonUnicode = Utils.NonUnicode(postData.Name);
@@ -313,7 +327,7 @@ namespace Application.Services.WebServices
                 ack.AddMessage("Lỗi thiếu setting mật khẩu mặc định");
                 return ack;
             }
-            user.Password = Utils.EncodePassword(defaultResetPassword, EEncodeType.SHA_256);
+            user.PasswordHash = Utils.EncodePassword(defaultResetPassword, EEncodeType.SHA_256);
             await ack.TrySaveChangesAsync(res => res.UpdateAsync(user), _userRepository.Repository);
             return ack;
         }
@@ -381,12 +395,12 @@ namespace Application.Services.WebServices
                 ack.AddMessage("Không tìm thấy người dùng.");
                 return ack;
             }
-            if (user.Password != postData.OldPassword)
+            if (user.PasswordHash != postData.OldPassword)
             {
                 ack.AddMessage("Mật khẩu cũ không chính xác.");
                 return ack;
             }
-            user.Password = postData.NewPassword;
+            user.PasswordHash = postData.NewPassword;
             user.UpdatedBy = _currentUserId;
             user.UpdatedDate = DateTime.Now;
             await ack.TrySaveChangesAsync(res => res.UpdateAsync(user), _userRepository.Repository);

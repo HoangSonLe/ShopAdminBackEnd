@@ -85,9 +85,9 @@ namespace Infrastructure.DBContexts
                     Id = 1,
                     UserName = "Admin",
                     NameNonUnicode = "Admin",
-                    Password = "/cA7ZZQqtyOGVwe1kEbPSg==", //123456
+                    PasswordHash = "/cA7ZZQqtyOGVwe1kEbPSg==", //123456
                     Name = "Admin",
-                    Phone = "",
+                    PhoneNumber = "",
                     TypeAccount = 1,
                     RoleIdList = new List<int>() { 1, 2, 3, 4 },
                     CreatedBy = 1,

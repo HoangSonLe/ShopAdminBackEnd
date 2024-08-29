@@ -111,7 +111,7 @@ namespace Infrastructure.Services
                 try
                 {
                     var _context = serviceScope.ServiceProvider.GetRequiredService<SampleDBContext>();
-                    var user = await _context.Users.FirstOrDefaultAsync(i => i.Phone == phoneNumber && i.State == (int)EState.Active);
+                    var user = await _context.Users.FirstOrDefaultAsync(i => i.PhoneNumber == phoneNumber && i.State == (int)EState.Active);
                     if (user == null)
                     {
                         response.AddMessage($"Người dùng với số điện thoại {phoneNumber} chưa được đăng ký trong phần mềm quản lý Linh Cốt.Vui lòng đăng ký tài khoản người dùng với số điện thoại này.");
