@@ -29,12 +29,14 @@ namespace Infrastructure.Entitites
 
 
         public long CustomerId { get; set; }
-        public User Customer { get; set; }
+        public CustomerInfor Customer { get; set; }
 
         public int ShipId { get; set; }
         public float ShipPrice { get; set; }
         public Ship Ship { get; set; }
 
+
+        public EmployeeInfor Employee { get; set; }
         public ICollection<BillDetail> BillDetails { get; set; }
 
     }

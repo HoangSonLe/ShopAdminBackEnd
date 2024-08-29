@@ -2,9 +2,9 @@
 {
     public class Product_Image
     {
-        public int ProductImageId { get; set; }
-        public string ImageUrl { get; set; }
-        public int ProductId { get; set; }
+        public long FileId { get; set; }
+        public FileAttachments ImageUrl { get; set; }
+        public long ProductId { get; set; }
         public Product Product { get; set; }
     }
 }

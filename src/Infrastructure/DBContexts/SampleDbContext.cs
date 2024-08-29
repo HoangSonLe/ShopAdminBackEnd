@@ -36,6 +36,16 @@ namespace Infrastructure.DBContexts
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
+        public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<TelegramChat> TelegramChats { get; set; }

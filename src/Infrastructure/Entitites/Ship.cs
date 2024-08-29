@@ -18,7 +18,7 @@ namespace Infrastructure.Entitites
         public float PricePerKm { get; set; }
 
         public string ShippingMethod { get; set; }
-        public ICollection<Bill_Ship> BillShips { get; set; }
+        public ICollection<Bill> Bills { get; set; }
 
     }
 }

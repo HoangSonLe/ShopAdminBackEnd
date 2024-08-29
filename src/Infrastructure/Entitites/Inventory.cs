@@ -6,7 +6,7 @@ namespace Infrastructure.Entitites
     {
         [Key]
         public long Id { get; set; }
-        public float Quantity { get; set; }
+        public decimal Quantity { get; set; }
 
 
         public int UnitId { get; set; }

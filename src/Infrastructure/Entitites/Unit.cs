@@ -1,7 +1,4 @@
-﻿using Core.Enums;
-using Core.Models.ViewModels;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Entitites
 {

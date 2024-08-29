@@ -6,7 +6,7 @@ namespace Infrastructure.Entitites
     public class EmployeeInfor
     {
         [Key]
-        public int EmployeeId { get; set; }
+        public long EmployeeId { get; set; }
         public string EmployeeCode { get; set; }
         public string FirstName { get; set; }
         public string FirstNameNonUnicode { get; set; }
@@ -20,5 +20,7 @@ namespace Infrastructure.Entitites
         // Foreign Key and Navigation property
         public int UserId { get; set; }
         public User User { get; set; }
+
+        public ICollection<Bill> Bills { get; set; }
     }
 }

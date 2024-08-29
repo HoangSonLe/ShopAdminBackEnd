@@ -1,7 +1,6 @@
 ﻿using Core.Enums;
-using Core.Models.ViewModels;
+using Infrastructure.DBContexts;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entitites
 {
@@ -16,5 +15,6 @@ namespace Infrastructure.Entitites
 
         public ICollection<Product_Tag> ProductTags { get; set; }
         public ICollection<Post_Tag> PostTags { get; set; }
+        public ICollection<Promotion_Tag> PromotionTags { get; set; }
     }
 }

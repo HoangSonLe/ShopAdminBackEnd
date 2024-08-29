@@ -2,7 +2,7 @@
 {
     public class CustomerInfor
     {
-        public long CustomerID { get; set; }
+        public long CustomerId { get; set; }
         public string CustomerCode { get; set; }
         public string FirstName { get; set; }
         public string FirstNameNonUnicode { get; set; }
@@ -18,5 +18,7 @@
         // Foreign Key and Navigation property
         public int UserId { get; set; }
         public User User { get; set; }
+
+        public ICollection<Bill> Bills { get; set; }
     }
 }

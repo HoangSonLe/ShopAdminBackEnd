@@ -8,7 +8,7 @@ namespace Infrastructure.Entitites
         public int Id { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }
-        public ICollection<Tag> Tags { get; set; }
-        public ICollection<Category> Categories { get; set; }
+        public ICollection<Post_Tag> Tags { get; set; }
+        public ICollection<Post_Category> Categories { get; set; }
     }
 }
