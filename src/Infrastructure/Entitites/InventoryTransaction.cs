@@ -11,8 +11,8 @@ namespace Infrastructure.Entitites
 
         public ETransactionType TransactionType { get; set; }
 
-        public long? BillId { get; set; }
-        public Bill? Bill { get; set; }
+        public long BillDetailId { get; set; }
+        public BillDetail BillDetail { get; set; }
         public int UnitId { get; set; }
         public Unit Unit { get; set; }
         public long ProductId { get; set; }

@@ -1,5 +1,4 @@
 ﻿using Core.Enums;
-using Infrastructure.DBContexts;
 using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Entitites
@@ -14,7 +13,9 @@ namespace Infrastructure.Entitites
         public string Description { get; set; }
 
         public ICollection<Product_Tag> ProductTags { get; set; }
-        public ICollection<Post_Tag> PostTags { get; set; }
-        public ICollection<Promotion_Tag> PromotionTags { get; set; }
+        public ICollection<Product> Products => ProductTags?.Select(pt => pt.Product).ToList();
+
+        public ICollection<Post_Tag> Posts { get; set; }
+        public ICollection<Promotion_Tag> Promotions { get; set; }
     }
 }

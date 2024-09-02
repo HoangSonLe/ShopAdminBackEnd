@@ -13,7 +13,12 @@ namespace Infrastructure.Entitites
         public Product Product { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
+        public int UnitPriceId { get; set; }
+        public Unit UnitPrice { get; set; }
         public int UnitId { get; set; }
         public Unit Unit { get; set; }
+
+        public long InventoryTransactionId { get; set; }
+        public InventoryTransaction InventoryTransaction { get; set; }
     }
 }

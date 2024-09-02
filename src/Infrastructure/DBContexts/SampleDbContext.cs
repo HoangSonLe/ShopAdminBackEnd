@@ -37,18 +37,30 @@ namespace Infrastructure.DBContexts
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<BillDetail> BillDetails { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Customer> CustomerInfors { get; set; }
+        public virtual DbSet<Employee> EmployeeInfors { get; set; }
+        public virtual DbSet<FileAttachments> FileAttachments { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<Post_Category> Post_Categories { get; set; }
+        public virtual DbSet<Post_Tag> Post_Tags { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product_Tag> Product_Tags { get; set; }
+        public virtual DbSet<ProductUnit> ProductUnits { get; set; }
+        public virtual DbSet<Promotion> Promotions { get; set; }
+        public virtual DbSet<Promotion_Tag> Promotion_Tags { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Ship> Ships { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<UnitConversion> UnitConversions { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<TelegramChat> TelegramChats { get; set; }
+        public virtual DbSet<User_Role> User_Roles { get; set; }
+        public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -61,7 +73,6 @@ namespace Infrastructure.DBContexts
 
             modelBuilder.ApplyConfiguration(new UserEntityConfigurations());
             modelBuilder.ApplyConfiguration(new RoleEntityConfigurations());
-            modelBuilder.ApplyConfiguration(new TelegramChatEntityConfigurations());
 
             //Default value for column entity models
 
@@ -71,7 +82,6 @@ namespace Infrastructure.DBContexts
                     Id = 1,
                     Name = "Admin",
                     Description = "Admin",
-                    CreatedBy = 1,
                     CreatedDate = DateTime.Now,
                     State = (int)EState.Active,
                     EnumActionList = new List<int> { 1, 2 },
@@ -82,7 +92,6 @@ namespace Infrastructure.DBContexts
                     Id = 2,
                     Name = "Dev",
                     Description = "Dev",
-                    CreatedBy = 1,
                     CreatedDate = DateTime.Now,
                     State = (int)EState.Active,
                     EnumActionList = new List<int> { 1, 2 },
@@ -94,13 +103,8 @@ namespace Infrastructure.DBContexts
                 {
                     Id = 1,
                     UserName = "Admin",
-                    NameNonUnicode = "Admin",
                     PasswordHash = "/cA7ZZQqtyOGVwe1kEbPSg==", //123456
-                    Name = "Admin",
                     PhoneNumber = "",
-                    TypeAccount = 1,
-                    RoleIdList = new List<int>() { 1, 2, 3, 4 },
-                    CreatedBy = 1,
                     CreatedDate = DateTime.Now,
                     State = (int)EState.Active,
                     Email = ""

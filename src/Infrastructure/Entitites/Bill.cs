@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Entitites
 {
-    public class Bill
+    public class Bill : BaseAuditableEntity
     {
         public long Id { get; set; }
         /// <summary>
@@ -19,24 +19,22 @@ namespace Infrastructure.Entitites
         public DateTime InvoiceDate { get; set; }
         public string Note { get; set; }
 
-
-        public int TaxId { get; set; }
-        public float TaxRate { get; set; }
+        public decimal TaxRate { get; set; }
 
 
-        public int VoucherId { get; set; }
-        public Voucher Voucher { get; set; }
+        public int? VoucherId { get; set; }
+        public Voucher? Voucher { get; set; }
 
 
         public long CustomerId { get; set; }
-        public CustomerInfor Customer { get; set; }
+        public Customer Customer { get; set; }
 
-        public int ShipId { get; set; }
-        public float ShipPrice { get; set; }
-        public Ship Ship { get; set; }
+        public int? ShipId { get; set; }
+        public float? ShipPrice { get; set; }
+        public Ship? Ship { get; set; }
 
-
-        public EmployeeInfor Employee { get; set; }
+        public long EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
         public ICollection<BillDetail> BillDetails { get; set; }
 
     }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Entitites
 {
-    public class EmployeeInfor
+    public class Employee
     {
         [Key]
         public long EmployeeId { get; set; }
@@ -18,7 +18,7 @@ namespace Infrastructure.Entitites
         public string Department { get; set; }
 
         // Foreign Key and Navigation property
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public User User { get; set; }
 
         public ICollection<Bill> Bills { get; set; }

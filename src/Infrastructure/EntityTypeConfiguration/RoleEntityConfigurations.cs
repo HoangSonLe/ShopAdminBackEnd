@@ -12,22 +12,13 @@ namespace Infrastructure.EntityTypeConfiguration
         {
             // Primary key
             builder.HasKey(p => p.Id);
-
-            // Properties
-            builder.Property(p => p.Name).HasColumnName("Name");
-            builder.Property(p => p.Description).HasColumnName("Description");
-            builder.Property(p => p.EnumActionList).HasColumnName("EnumActionList");
-            builder.Property(p => p.Level).HasColumnName("Level");
-
-
-            builder.Property(p => p.State).HasColumnName("State");
-            builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
-            builder.Property(p => p.CreatedBy).HasColumnName("CreatedBy");
-            builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
-            builder.Property(p => p.UpdatedBy).HasColumnName("UpdatedBy");
-
+            // Relationships
+            builder.HasMany(r => r.Users)
+                .WithOne(ur => ur.Role)
+                .HasForeignKey(ur => ur.RoleId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete when Role is deleted
             // Table
-            builder.ToTable("Role");
+            builder.ToTable("Roles");
         }
     }
 }

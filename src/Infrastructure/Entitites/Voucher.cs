@@ -30,6 +30,6 @@ namespace Infrastructure.Entitites
         public DateTime StartDate { get; set; }
         public DateTime ExpiredDate { get; set; }
 
-        public ICollection<Bill_Voucher> BillVouchers { get; set; }
+        public ICollection<Bill> Bills { get; set; }
     }
 }

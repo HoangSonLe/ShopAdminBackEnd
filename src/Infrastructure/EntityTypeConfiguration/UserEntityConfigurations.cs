@@ -28,6 +28,7 @@ namespace Infrastructure.EntityTypeConfiguration
             builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
             builder.Property(p => p.UpdatedBy).HasColumnName("UpdatedBy");
 
+            builder.
             // Table
             builder.ToTable("Users");
         }

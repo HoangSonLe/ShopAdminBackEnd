@@ -14,5 +14,6 @@ namespace Infrastructure.Entitites
         public int Level { get; set; }
 
         public List<int> EnumActionList { get; set; }
+        public ICollection<User_Role> Users { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace Infrastructure.Entitites
         public required string UnitName { get; set; }
         public required string UnitNameNonUnicode { get; set; }
         public string Description { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public ICollection<ProductUnit> ProductUnits { get; set; }
     }
 }

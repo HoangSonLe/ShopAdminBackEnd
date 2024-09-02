@@ -92,7 +92,9 @@ namespace Core.Enums
         [Description("Nhập hàng")]
         Import,
         [Description("Bán hàng")]
-        Export
+        Export,
+        [Description("Trả hàng")]
+        Revert
     } 
     public enum EBillType
     {
@@ -149,6 +151,13 @@ namespace Core.Enums
     {
         [Description("Không xác định")]
         UNDEFINE,
+    }
+    public enum EShipMethodType
+    {
+        [Description("Bình thường")]
+        Normal,
+        [Description("Giao nhanh")]
+        FastDelivery,
     }
 
 }

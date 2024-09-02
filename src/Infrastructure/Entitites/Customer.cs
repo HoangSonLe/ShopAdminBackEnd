@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Entitites
 {
-    public class CustomerInfor
+    public class Customer
     {
         public long CustomerId { get; set; }
         public string CustomerCode { get; set; }
@@ -16,7 +16,7 @@
         public string BillingAddressNonUnicode { get; set; }
 
         // Foreign Key and Navigation property
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public User User { get; set; }
 
         public ICollection<Bill> Bills { get; set; }

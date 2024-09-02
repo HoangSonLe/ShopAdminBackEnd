@@ -1,7 +1,5 @@
 ﻿using Core.Enums;
-using Core.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entitites
 {
@@ -17,7 +15,7 @@ namespace Infrastructure.Entitites
         /// </summary>
         public float PricePerKm { get; set; }
 
-        public string ShippingMethod { get; set; }
+        public EShipMethodType ShippingMethodType { get; set; }
         public ICollection<Bill> Bills { get; set; }
 
     }

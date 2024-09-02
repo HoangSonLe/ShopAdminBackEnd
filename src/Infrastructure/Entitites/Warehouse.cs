@@ -7,6 +7,6 @@
         public string NameNonUnicode { get; set; }
 
         public ICollection<Inventory> Inventories { get; set; }
-        public ICollection<InventoryTransaction> Transactions { get; set; }
+        public ICollection<InventoryTransaction> InventoryTransactions { get; set; }
     }
 }
