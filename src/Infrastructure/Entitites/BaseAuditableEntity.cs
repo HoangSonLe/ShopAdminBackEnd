@@ -9,7 +9,7 @@ namespace Infrastructure.Entitites
 
         public DateTime? UpdatedDate { get; set; } = DateTime.Now;
 
-        public int? UpdatedBy { get; set; } = 1;
+        public long? UpdatedBy { get; set; } = 1;
         /// <summary>
         /// EState
         /// </summary>

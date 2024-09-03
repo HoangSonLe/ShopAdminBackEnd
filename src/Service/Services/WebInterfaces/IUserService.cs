@@ -10,7 +10,7 @@ namespace Application.Services.WebInterfaces
     public interface IUserService : IBaseService, IDisposable
     {
         Task<Acknowledgement<UserViewModel>> Login(LoginViewModel loginModel);
-        Task<Acknowledgement> UpdateRefreshToken(int userId, string refreshToken);
+        Task<Acknowledgement> UpdateRefreshToken(long userId, string refreshToken);
         Task<Acknowledgement> LockUser(string userName);
 
         Task<Acknowledgement<JsonResultPaging<List<UserViewModel>>>> GetUserList(UserSearchModel postData);
@@ -21,7 +21,7 @@ namespace Application.Services.WebInterfaces
         Task<Acknowledgement> ResetUserPasswordById(int userId);
         Task<Acknowledgement> ChangePassword([FromBody] ChangePasswordModel postData);
 
-        Task<Acknowledgement<List<KendoDropdownListModel<int>>>> GetUserDataDropdownList(string searchString, List<int> selectedIdList);
+        Task<Acknowledgement<List<KendoDropdownListModel<int>>>> GetUserDataDropdownList(string searchString, List<long> selectedIdList);
 
     }
 }

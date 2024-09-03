@@ -2,7 +2,7 @@
 {
     public class TokenModel
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public string Name { get; set; }
         public List<int> RoleIds { get; set; }
         public string AccessToken { get; set; }

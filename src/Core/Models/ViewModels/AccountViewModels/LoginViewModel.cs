@@ -21,7 +21,7 @@ namespace Core.Models.ViewModels.AccountViewModels
     }
     public class LogoutModel
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
     }
     public class UserLoginResponse
     {

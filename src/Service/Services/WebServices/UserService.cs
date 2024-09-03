@@ -61,7 +61,7 @@ namespace Application.Services.WebServices
 
         }
 
-        public async Task<Acknowledgement> UpdateRefreshToken(int userId, string refreshToken)
+        public async Task<Acknowledgement> UpdateRefreshToken(long userId, string refreshToken)
         {
             var ack = new Acknowledgement();
             var user = await _userRepository.Repository.FirstOrDefaultAsync(i => i.Id == userId);
@@ -76,7 +76,6 @@ namespace Application.Services.WebServices
         }
         public async Task<Acknowledgement<UserViewModel>> Login(LoginViewModel loginModel)
         {
-            //var ack = await _telegramService.SendMessageAsync("5247682503", "Test send telegram message!");
             var response = new Acknowledgement<UserViewModel>();
             try
             {
@@ -85,10 +84,10 @@ namespace Application.Services.WebServices
                 if (userResponse.IsSuccess)
                 {
                     var userDB = userResponse.Data;
-                    var roleDBList = await _roleRepository.ReadOnlyRespository.GetAsync(i => userDB.RoleIdList.Contains(i.Id));
+                    var roles = userDB.Roles.Select(i => i.Role).ToList();
                     UserViewModel userViewModel = _mapper.Map<UserViewModel>(userDB);
-                    userViewModel.RoleName = string.Join(",", roleDBList.Select(i => i.Description));
-                    userViewModel.EnumActionList = roleDBList.SelectMany(i => i.EnumActionList).Distinct().ToList();
+                    userViewModel.RoleName = string.Join(",", roles.Select(i => i.Description));
+                    userViewModel.EnumActionList = roles.SelectMany(i => i.EnumActionList).Distinct().ToList();
                     response.Data = userViewModel;
                 }
                 else
@@ -128,7 +127,7 @@ namespace Application.Services.WebServices
             }
             return response;
         }
-        public async Task<Acknowledgement<List<KendoDropdownListModel<int>>>> GetUserDataDropdownList(string searchString, List<int> selectedIdList)
+        public async Task<Acknowledgement<List<KendoDropdownListModel<int>>>> GetUserDataDropdownList(string searchString, List<long> selectedIdList)
         {
             var predicate = PredicateBuilder.New<User>(i => i.State == (int)EState.Active);
             predicate = UserAuthorPredicate.GetUserAuthorPredicate(predicate, _currentUserRoleId, _currentUserId);
@@ -137,20 +136,20 @@ namespace Application.Services.WebServices
             {
                 var tmpPredicate = PredicateBuilder.New<User>(predicate);
                 tmpPredicate = tmpPredicate.And(i => selectedIdList.Contains(i.Id));
-                selectedUserList = (await _userRepository.ReadOnlyRespository.GetAsync(tmpPredicate, i => i.OrderBy(p => p.Name))).ToList();
+                //selectedUserList = (await _userRepository.ReadOnlyRespository.GetAsync(tmpPredicate, i => i.OrderBy(p => p.Name))).ToList();/TODO
             }
             if (!string.IsNullOrEmpty(searchString))
             {
                 var searchStringNonUnicode = Utils.NonUnicode(searchString.Trim().ToLower());
-                predicate = predicate.And(i => i.UserName.Trim().ToLower().Contains(searchStringNonUnicode) ||
-                                                i.NameNonUnicode.Trim().ToLower().Contains(searchStringNonUnicode)
-                                         );
+                //predicate = predicate.And(i => i.UserName.Trim().ToLower().Contains(searchStringNonUnicode) ||
+                //                                i.NameNonUnicode.Trim().ToLower().Contains(searchStringNonUnicode)
+                //                         ); //TODO
             }
-            var userDbList = await _userRepository.ReadOnlyRespository.GetWithPagingAsync(new PagingParameters(1, 50 - selectedUserList.Count()), predicate, i => i.OrderBy(p => p.Name));
+            var userDbList = await _userRepository.ReadOnlyRespository.GetWithPagingAsync(new PagingParameters(1, 50 - selectedUserList.Count()), predicate,null /*i => i.OrderBy(p => p.Name)*/);//TODO
             var data = userDbList.Data.Concat(selectedUserList).Select(i => new KendoDropdownListModel<int>()
             {
                 Value = i.Id.ToString(),
-                Text = $"{i.Name} - {i.PhoneNumber}",
+                //Text = $"{i.Name} - {i.PhoneNumber}", TODO
             }).ToList();
             return new Acknowledgement<List<KendoDropdownListModel<int>>>()
             {
@@ -169,14 +168,14 @@ namespace Application.Services.WebServices
                 {
                     var searchStringNonUnicode = Utils.NonUnicode(searchModel.SearchString.Trim().ToLower());
                     predicate = predicate.And(i => i.UserName.Trim().ToLower().Contains(searchStringNonUnicode) ||
-                                                    i.NameNonUnicode.Trim().ToLower().Contains(searchStringNonUnicode) ||
+                                                    //i.NameNonUnicode.Trim().ToLower().Contains(searchStringNonUnicode) ||TODO
                                                     string.IsNullOrEmpty(i.PhoneNumber) == false && i.PhoneNumber.Trim().ToLower().Contains(searchStringNonUnicode)
                                              );
                 }
-                if (searchModel.RoleIdList.Count > 0)
-                {
-                    predicate = predicate.And(p => p.RoleIdList.Intersect(searchModel.RoleIdList).Any());
-                }
+                //if (searchModel.RoleIdList.Count > 0)
+                //{
+                //    predicate = predicate.And(p => p.RoleIdList.Intersect(searchModel.RoleIdList).Any());
+                //}TODO
 
                 var userList = new List<UserViewModel>();
                 predicate = UserAuthorPredicate.GetUserAuthorPredicate(predicate, _currentUserRoleId, _currentUserId);
@@ -195,7 +194,7 @@ namespace Application.Services.WebServices
                     user.RoleViewList = _mapper.Map<List<RoleViewModel>>(roles);
 
                     var updateUser = updateByUserList.First(i => i.Id == user.UpdatedBy);
-                    user.UpdatedByName = updateUser.Name;
+                    //user.UpdatedByName = updateUser.Name;//TODO
                 }
                 response.Data = new JsonResultPaging<List<UserViewModel>>()
                 {
@@ -268,12 +267,10 @@ namespace Application.Services.WebServices
             if (postData.Id == 0)
             {
                 var newUser = _mapper.Map<User>(postData);
-                newUser.NameNonUnicode = Utils.NonUnicode(newUser.Name);
+                //newUser.NameNonUnicode = Utils.NonUnicode(newUser.Name);.//TODO
                 newUser.PasswordHash = postData.Password;
                 newUser.CreatedDate = DateTime.Now;
-                newUser.CreatedBy = _currentUserId;
                 newUser.UpdatedDate = newUser.CreatedDate;
-                newUser.UpdatedBy = newUser.CreatedBy;
                 await ack.TrySaveChangesAsync(res => res.AddAsync(newUser), _userRepository.Repository);
             }
             else
@@ -287,11 +284,11 @@ namespace Application.Services.WebServices
                 }
                 else
                 {
-                    existItem.Name = postData.Name;
+                    //existItem.Name = postData.Name; TODO
                     existItem.PhoneNumber = postData.Phone;
                     existItem.Email = postData.Email;
                     existItem.UserName = postData.UserName;
-                    existItem.NameNonUnicode = Utils.NonUnicode(postData.Name);
+                    //existItem.NameNonUnicode = Utils.NonUnicode(postData.Name); //TODO
                     existItem.UpdatedDate = DateTime.Now;
                     existItem.UpdatedBy = _currentUserId;
                     await ack.TrySaveChangesAsync(res => res.UpdateAsync(existItem), _userRepository.Repository);
@@ -347,20 +344,20 @@ namespace Application.Services.WebServices
 
                 ack.Data = _mapper.Map<UserViewModel>(user);
                 ack.IsSuccess = true;
-                if (user.RoleIdList.Count > 0)
-                {
-                    var predicate = PredicateBuilder.New<Role>(i => i.State == (int)EState.Active);
-                    predicate = predicate.And(e => user.RoleIdList.Contains(e.Id));
+                //if (user.RoleIdList.Count > 0)
+                //{
+                //    var predicate = PredicateBuilder.New<Role>(i => i.State == (int)EState.Active);
+                //    predicate = predicate.And(e => user.RoleIdList.Contains(e.Id));
 
-                    var listRole = await _roleRepository.ReadOnlyRespository.GetAsync(predicate);
-                    if (listRole != null)
-                    {
-                        var listPermission = new List<int>();
-                        listPermission = listRole.SelectMany(e => e.EnumActionList).Distinct().ToList();
-                        ack.Data.EnumActionList = listPermission;
-                    }
-                }
-
+                //    var listRole = await _roleRepository.ReadOnlyRespository.GetAsync(predicate);
+                //    if (listRole != null)
+                //    {
+                //        var listPermission = new List<int>();
+                //        listPermission = listRole.SelectMany(e => e.EnumActionList).Distinct().ToList();
+                //        ack.Data.EnumActionList = listPermission;
+                //    }
+                //}
+                //TODO
                 return ack;
 
             }

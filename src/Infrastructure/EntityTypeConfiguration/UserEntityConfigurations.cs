@@ -11,25 +11,23 @@ namespace Infrastructure.EntityTypeConfiguration
             // Primary key
             builder.HasKey(p => p.Id);
 
-            // Properties
-            builder.Property(p => p.UserName).HasColumnName("UserName");
-            builder.Property(p => p.PasswordHash).HasColumnName("Password");
-            builder.Property(p => p.Name).HasColumnName("Name");
-            builder.Property(p => p.Email).HasColumnName("Email");
-            builder.Property(p => p.PhoneNumber).HasColumnName("Phone");
-            builder.Property(p => p.TypeAccount).HasColumnName("TypeAccount");
-            builder.Property(p => p.NameNonUnicode).HasColumnName("NameNonUnicode");
-            builder.Property(p => p.RoleIdList).HasColumnName("RoleIdList");
+            // Relationships
+            builder.HasMany(u => u.Roles)
+                   .WithOne()
+                   .HasForeignKey(ur => ur.UserId) // Giả sử User_Role có UserId là khóa ngoại
+                   .OnDelete(DeleteBehavior.Cascade); // Xóa User sẽ xóa các vai trò liên quan
 
+            builder.HasOne(u => u.Customer)
+                   .WithOne(c => c.User)
+                   .HasForeignKey<Customer>(c => c.UserId)
+                   .OnDelete(DeleteBehavior.Restrict); // Thiết lập quan hệ 1-1
 
-            builder.Property(p => p.State).HasColumnName("State");
-            builder.Property(p => p.CreatedDate).HasColumnName("CreatedDate");
-            builder.Property(p => p.CreatedBy).HasColumnName("CreatedBy");
-            builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
-            builder.Property(p => p.UpdatedBy).HasColumnName("UpdatedBy");
+            builder.HasOne(u => u.Employee)
+                   .WithOne(e => e.User)
+                   .HasForeignKey<Employee>(e => e.UserId)
+                   .OnDelete(DeleteBehavior.Restrict); // Thiết lập quan hệ 1-1
 
-            builder.
-            // Table
+            // Table Mapping (Nếu cần, định nghĩa tên bảng khác)
             builder.ToTable("Users");
         }
     }

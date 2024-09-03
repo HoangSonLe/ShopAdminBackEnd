@@ -19,9 +19,8 @@ namespace Application.Services.WebServices
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
         public IConfiguration Configuration => _configuration;
-        public int _currentUserId;
+        public long _currentUserId;
         public List<ERoleType> _currentUserRoleId;
-        public int? _currentTenantId;
 
         public BaseService(
             ILogger<T> logger,
@@ -43,7 +42,7 @@ namespace Application.Services.WebServices
                 {
                     throw new ArgumentException("Claim must have UserID.");
                 }
-                if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated == true && !int.TryParse(userId, out _currentUserId))
+                if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated == true && !long.TryParse(userId, out _currentUserId))
                 {
                     throw new ArgumentException("Claim UserID is correct format.");
                 }

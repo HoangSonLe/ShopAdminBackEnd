@@ -6,11 +6,11 @@ namespace Core.Models.ViewModels
     {
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        public int CreatedBy { get; set; } = 1;
+        public long CreatedBy { get; set; } = 1;
 
         public DateTime? UpdatedDate { get; set; } = DateTime.Now;
 
-        public int? UpdatedBy { get; set; } = 1;
+        public long? UpdatedBy { get; set; } = 1;
         /// <summary>
         /// EState
         /// </summary>
