@@ -23,7 +23,7 @@ namespace Infrastructure.EntityTypeConfiguration
 
             builder.HasOne(t => t.BillDetail)
                 .WithMany()
-                .HasForeignKey(t => t.BillId)
+                .HasForeignKey(t => t.BillDetailId)
                 .OnDelete(DeleteBehavior.SetNull); // Set null on BillDetail reference when Bill is deleted
 
             builder.HasOne(t => t.Inventory)

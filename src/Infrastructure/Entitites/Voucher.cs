@@ -8,7 +8,7 @@ namespace Infrastructure.Entitites
     public class Voucher : BaseAuditableEntity
     {
         [Key]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public required string VoucherName { get; set; }
         public required string VoucherNameNonUnicode { get; set; }
         public string Description { get; set; }

@@ -1,7 +1,5 @@
 ﻿using Core.Enums;
-using Core.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entitites
 {

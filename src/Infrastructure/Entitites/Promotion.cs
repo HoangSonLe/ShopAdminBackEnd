@@ -5,7 +5,7 @@ namespace Infrastructure.Entitites
     public class Promotion
     {
         [Key]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public required string PromotionName { get; set; }
         public required string PromotionNameNonUnicode { get; set; }
         public string Description { get; set; }

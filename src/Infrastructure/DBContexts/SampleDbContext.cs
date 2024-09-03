@@ -13,7 +13,7 @@ namespace Infrastructure.DBContexts
         public SampleReadOnlyDBContext(DbContextOptions<SampleDBContext> options)
            : base(options)
         {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
         }
         public override int SaveChanges()
         {
@@ -71,8 +71,32 @@ namespace Infrastructure.DBContexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.ApplyConfiguration(new UserEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new BillDetailEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new BillEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new CategoryEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new CustomerEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new EmployeeEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new FileAttachmentsEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new InventoryEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new InventoryTransactionEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new Post_CategoryEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new Post_TagEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new PostEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new Product_TagEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductUnitEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new Promotion_TagEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new PromotionEntityConfigurations());
             modelBuilder.ApplyConfiguration(new RoleEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new ShipEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new TagEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new TransactionEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new UnitConversionEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new UnitEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new User_RoleEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new UserEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new VoucherEntityConfigurations());
+            modelBuilder.ApplyConfiguration(new WarehouseEntityConfigurations());
 
             //Default value for column entity models
 
@@ -107,7 +131,9 @@ namespace Infrastructure.DBContexts
                     PhoneNumber = "",
                     CreatedDate = DateTime.Now,
                     State = (int)EState.Active,
-                    Email = ""
+                    Email = "",
+                    AccountType = EAccountType.Employee,
+                    RefreshToken = ""
                 }
             );
 

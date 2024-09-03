@@ -31,6 +31,11 @@ namespace Infrastructure.EntityTypeConfiguration
                 .WithMany()
                 .HasForeignKey(bd => bd.UnitId)
                 .OnDelete(DeleteBehavior.Restrict); // Restrict deletion of Unit if used in BillDetail
+
+            builder.HasOne(bd => bd.InventoryTransaction)
+                    .WithMany() // Assuming no collection in InventoryTransaction entity
+                    .HasForeignKey(bd => bd.InventoryTransactionId)
+                    .OnDelete(DeleteBehavior.Restrict);
             // Table
             builder.ToTable("BillDetails");
         }

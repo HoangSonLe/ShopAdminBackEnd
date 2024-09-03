@@ -10,7 +10,7 @@ namespace Infrastructure.Entitites
         public Unit Unit { get; set; }
         public int WarehouseId { get; set; }
         public Warehouse Warehouse { get; set; }
-        public long? BillId { get; set; }
+        public long? BillDetailId { get; set; }
         public BillDetail? BillDetail { get; set; }
         public long InventoryId { get; set; }
         public Inventory Inventory { get; set; }
