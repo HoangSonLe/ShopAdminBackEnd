@@ -1,4 +1,4 @@
-﻿##Region Code Rules
+﻿## Region Code Rules
 - Private Params: Begin with "_" (_userId,_locationId,...)
 - Public Params: Normal (userId, locationId,...)
 - Use camel case for naming params'name (<EXAMPLE> : locationName)
@@ -8,11 +8,20 @@
 - Avoid double code => Write common functions
 - 
 - 
-##EndRegion
+## EndRegion
+
+## REGION RUN
+
+Run CMD From Src Folder
+
+dotnet ef migrations add InitialCreate --context SampleDBContext --project Infrastructure --startup-project API
+
+dotnet ef database update --context SampleDBContext --project Infrastructure --startup-project API
+
+## ENDREGION
 
 
-
-
+## Region Project Structure
 MyAspNetCoreSolution/
 │
 ├── MyAspNetCore.Web/           # ASP.NET Core Web Application (MVC or API)
@@ -47,3 +56,5 @@ MyAspNetCoreSolution/
     ├── UnitTests/              # Unit tests for individual components
     ├── IntegrationTests/       # Integration tests for end-to-end scenarios
     └── TestUtilities/          # Helper classes and utilities for testing
+
+## EndRegion

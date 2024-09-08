@@ -31,11 +31,11 @@ namespace Infrastructure.EntityTypeConfiguration
                 .HasForeignKey(e => e.ProductId); // Replace with actual foreign key if needed
 
             builder.HasMany(e => e.ProductTags)
-                .WithOne() // Assuming no navigation property on Product_Tag for Product
+                .WithOne(i=> i.Product) // Assuming no navigation property on Product_Tag for Product
                 .HasForeignKey(e => e.ProductId); // Replace with actual foreign key if needed
 
             builder.HasMany(e => e.Inventories)
-                .WithOne() // Assuming no navigation property on Inventory for Product
+                .WithOne( i=> i.Product) // Assuming no navigation property on Inventory for Product
                 .HasForeignKey(e => e.ProductId); // Replace with actual foreign key if needed
 
             // Table

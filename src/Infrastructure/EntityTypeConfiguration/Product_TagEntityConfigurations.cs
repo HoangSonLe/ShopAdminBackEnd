@@ -19,7 +19,7 @@ namespace Infrastructure.EntityTypeConfiguration
                 .WithMany(t => t.ProductTags)
                 .HasForeignKey(pt => pt.TagId);
             // Table
-            builder.ToTable("Products");
+            builder.ToTable("Product_Tag");
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Infrastructure.EntityTypeConfiguration
                 .HasForeignKey(e=> e.ProductUnitId); // Assuming ProductUnitId is in UnitConversion
 
             // Table
-            builder.ToTable("ProductUnit");
+            builder.ToTable("ProductUnits");
         }
     }
 }

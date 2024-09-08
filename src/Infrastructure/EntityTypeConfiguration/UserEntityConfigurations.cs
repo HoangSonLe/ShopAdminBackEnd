@@ -13,7 +13,7 @@ namespace Infrastructure.EntityTypeConfiguration
 
             // Relationships
             builder.HasMany(u => u.Roles)
-                   .WithOne()
+                   .WithOne(i=> i.User)
                    .HasForeignKey(ur => ur.UserId) // Giả sử User_Role có UserId là khóa ngoại
                    .OnDelete(DeleteBehavior.Cascade); // Xóa User sẽ xóa các vai trò liên quan
 
