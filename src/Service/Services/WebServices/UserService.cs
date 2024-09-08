@@ -41,8 +41,7 @@ namespace Application.Services.WebServices
             var response = new Acknowledgement<User>();
 
             var hashPassword = Utils.EncodePassword(password, EEncodeType.SHA_256);
-            var userDB = (await _userRepository.ReadOnlyRespository.GetAsync(u => u.UserName.ToLower() == userName.ToLower() && u.State == (short)EState.Active, null, null, "Tenant")).FirstOrDefault();
-
+            var userDB = await _userRepository.GetUserWithRolesByUserNameAsync(userName);
 
             if (userDB == null)
             {
@@ -71,6 +70,7 @@ namespace Application.Services.WebServices
                 return ack;
             }
             user.RefreshToken = refreshToken;
+            user.LastLoginDate = DateTime.Now;
             await ack.TrySaveChangesAsync(res => res.UpdateAsync(user), _userRepository.Repository, (ex) => _logger.LogError(ex.Message));
             return ack;
         }
@@ -299,7 +299,7 @@ namespace Application.Services.WebServices
         public async Task<Acknowledgement> DeleteUserById(int userId)
         {
             var ack = new Acknowledgement();
-            var user = await _userRepository.Repository.FirstOrDefaultAsync(i => i.Id == userId, "UrnList,UrnList.Urn");
+            var user = await _userRepository.Repository.FirstOrDefaultAsync(i => i.Id == userId); //TODO
             if (user == null)
             {
                 ack.AddMessage("Không tìm thấy người dùng");
@@ -312,7 +312,7 @@ namespace Application.Services.WebServices
         public async Task<Acknowledgement> ResetUserPasswordById(int userId)
         {
             var ack = new Acknowledgement();
-            var user = await _userRepository.Repository.FirstOrDefaultAsync(i => i.Id == userId, "UrnList,UrnList.Urn");
+            var user = await _userRepository.Repository.FirstOrDefaultAsync(i => i.Id == userId); //TODO
             if (user == null)
             {
                 ack.AddMessage("Không tìm thấy người dùng");

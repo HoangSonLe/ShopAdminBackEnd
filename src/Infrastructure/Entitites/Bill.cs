@@ -33,7 +33,7 @@ namespace Infrastructure.Entitites
         public float? ShipPrice { get; set; }
         public Ship? Ship { get; set; }
 
-        public long EmployeeId { get; set; }
+        public long? EmployeeId { get; set; }
         public Employee? Employee { get; set; }
         public ICollection<BillDetail> BillDetails { get; set; }
 

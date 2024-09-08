@@ -14,11 +14,11 @@ namespace Application.Repository
     }
     public class RepositoryGenerator<TEntity> : IRepositoryGenerator<TEntity> where TEntity : class
     {
-        private DbContext _dbContext;
-        private DbContext _dbReadOnlyContext;
+        protected DbContext _dbContext;
+        protected DbContext _dbReadOnlyContext;
         private readonly Repository<TEntity> _Repository;
         private readonly RespositoryAsNoTracking<TEntity> _ReadOnlyRespository;
-
+      
         public RepositoryGenerator(DbContext dbContext, DbContext dBReadOnlyContext)
         {
             _dbContext = dbContext;
@@ -69,7 +69,7 @@ namespace Application.Repository
         private PagingQuery _Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "", PagingParameters paging = null)
+            PagingParameters paging = null, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             var result = new PagingQuery();
             IQueryable<TEntity> query = _dbSet.AsQueryable();
@@ -77,8 +77,7 @@ namespace Application.Repository
             {
                 query = query.Where(filter);
             }
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
             }
@@ -111,23 +110,23 @@ namespace Application.Repository
         #region PUBLIC
         public async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, PagingParameters paging = null,
-            string includeProperties = "")
+             params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            var query = _Get(filter, orderBy, includeProperties, paging).QueryPaging;
+            var query = _Get(filter, orderBy, paging, includeProperties).QueryPaging;
             return await query.ToListAsync();
         }
         public async Task<PagedResponse<TEntity>> GetWithPagingAsync(
             PagingParameters paging,
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = ""
+           params Expression<Func<TEntity, object>>[] includeProperties
         )
         {
             if (paging == null)
             {
                 throw new ArgumentNullException("Paging parameters can not be null");
             }
-            var query = _Get(filter, orderBy, includeProperties, paging);
+            var query = _Get(filter, orderBy, paging, includeProperties);
             var totalRecords = await query.QueryNoPaging.CountAsync();
             var data = await query.QueryPaging.ToListAsync();
             return new PagedResponse<TEntity>(data, paging.PageNumber, paging.PageSize, totalRecords);
@@ -138,11 +137,10 @@ namespace Application.Repository
                 throw new ArgumentNullException("id");
             return await DbSet.FindAsync(id);
         }
-        public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, string includeProperties = "")
+        public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             var query = _dbSet;
-            foreach (var includeProperty in includeProperties.Split
-               (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProperty in includeProperties)
             {
                 query = query.Include(includeProperty);
             }
