@@ -5,5 +5,6 @@ namespace Application.Interfaces
 {
     public interface IUserRepository : IRepositoryGenerator<User>
     {
+        Task<User> GetUserWithRolesByUserNameAsync(string userName);
     }
 }

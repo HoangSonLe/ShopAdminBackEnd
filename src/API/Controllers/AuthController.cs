@@ -8,6 +8,7 @@ using Core.Models.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace API.Controllers
 {
@@ -45,7 +46,7 @@ namespace API.Controllers
 
                 var user = userAck.Data;
                 var token = _tokenService.GenerateJwtToken(user.Id.ToString());
-                ack.IsSuccess = true;
+                ack.StatusCode = HttpStatusCode.OK;
                 ack.Data = new TokenModel()
                 {
                     UserId = user.Id,
@@ -72,7 +73,7 @@ namespace API.Controllers
             var ack = new Acknowledgement();
             try
             {
-                ack.IsSuccess = true;
+                ack.StatusCode = HttpStatusCode.OK;
                 return ack;
             }
             catch (Exception ex)

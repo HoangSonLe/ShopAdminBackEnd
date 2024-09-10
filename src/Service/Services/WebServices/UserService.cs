@@ -15,6 +15,7 @@ using LinqKit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 
 namespace Application.Services.WebServices
@@ -55,7 +56,7 @@ namespace Application.Services.WebServices
                 return response;
             }
             response.Data = userDB;
-            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.OK;
             return response;
 
         }
@@ -80,7 +81,7 @@ namespace Application.Services.WebServices
             try
             {
                 var userResponse = await GetUser(loginModel.UserName, loginModel.Password);
-                response.IsSuccess = userResponse.IsSuccess;
+                response.StatusCode = userResponse.StatusCode;
                 if (userResponse.IsSuccess)
                 {
                     var userDB = userResponse.Data;
@@ -117,7 +118,7 @@ namespace Application.Services.WebServices
                     user.State = (short)EState.Active;
                     await response.TrySaveChangesAsync(res => res.UpdateAsync(user), _userRepository.Repository);
                 }
-                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
                 return response;
             }
             catch (Exception ex)
@@ -153,7 +154,7 @@ namespace Application.Services.WebServices
             }).ToList();
             return new Acknowledgement<List<KendoDropdownListModel<int>>>()
             {
-                IsSuccess = true,
+                StatusCode = HttpStatusCode.OK,
                 Data = data
             };
         }
@@ -203,7 +204,7 @@ namespace Application.Services.WebServices
                     PageSize = searchModel.PageSize,
                     Total = userDbQuery.TotalRecords
                 };
-                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
                 return response;
             }
             catch (Exception ex)
@@ -279,7 +280,7 @@ namespace Application.Services.WebServices
                 if (existItem == null)
                 {
                     ack.AddMessage("Không tìm thấy người dùng");
-                    ack.IsSuccess = false;
+                    ack.StatusCode = HttpStatusCode.BadRequest;
                     return ack;
                 }
                 else
@@ -337,13 +338,13 @@ namespace Application.Services.WebServices
                 var user = await _userRepository.ReadOnlyRespository.FindAsync(userId);
                 if (user == null)
                 {
-                    ack.IsSuccess = false;
+                    ack.StatusCode = HttpStatusCode.BadRequest;
                     ack.AddMessages("Không tìm thấy user");
                     return ack;
                 }
 
                 ack.Data = _mapper.Map<UserViewModel>(user);
-                ack.IsSuccess = true;
+                ack.StatusCode = HttpStatusCode.OK;
                 //if (user.RoleIdList.Count > 0)
                 //{
                 //    var predicate = PredicateBuilder.New<Role>(i => i.State == (int)EState.Active);

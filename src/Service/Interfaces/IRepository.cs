@@ -9,14 +9,14 @@ namespace Application.Interfaces
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             PagingParameters paging = null,
-            string includeProperties = ""
+            params Expression<Func<TEntity, object>>[] includeProperties
         );
         Task<PagedResponse<TEntity>> GetWithPagingAsync(PagingParameters paging, Expression<Func<TEntity, bool>> filter = null,
          Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-         string includeProperties = "");
+         params Expression<Func<TEntity, object>>[] includeProperties);
         Task<TEntity> FindAsync(object id);
 
-        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, string includeProperties = "");
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
 
         Task<TEntity> LastOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
